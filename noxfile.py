@@ -2,7 +2,7 @@ import tempfile
 
 import nox
 
-src = "fatigue-detection", "tests"
+src = "detector", "tests"
 
 
 # from nox_poetry import session
