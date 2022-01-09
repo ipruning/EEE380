@@ -1,0 +1,31 @@
+name: autoformat
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.9
+      - name: Set up Poetry
+        uses: abatilo/actions-poetry@master
+        with:
+          poetry-version: 1.1.12
+      - name: Setup Nox
+        uses: excitedleigh/setup-nox@v2.0.0
+      - name: Formatting
+        run: |
+          nox -rs formatting
+      - name: If needed, commit black changes to the pull request
+        if: failure()
+        run: |
+          git config --global user.name 'autoformat'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_HEAD_REF
+          black .
+          git add .
+          git commit -m "fixup: Format Python code with Black"
+          git push
