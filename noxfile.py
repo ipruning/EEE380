@@ -28,6 +28,13 @@ def formatting(session):
     session.run("isort", ".")
 
 
+@nox.session
+def formatting_check(session):
+    install_with_constraints(session, "black", "isort")
+    session.run("black", ".", "--check")
+    session.run("isort", ".", "--check")
+
+
 @nox.session(python=["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"])
 def testing(session):
     install_with_constraints(session, "pytest", "pytest-cov", "coverage[toml]", "loguru")

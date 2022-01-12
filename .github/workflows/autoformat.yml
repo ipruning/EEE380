@@ -15,10 +15,9 @@ jobs:
           poetry-version: 1.1.12
       - name: Setup Nox
         uses: excitedleigh/setup-nox@v2.0.0
-      - name: Check Formatting
+      - name: Check
         run: |
-          black --check .
-          isort . -c
+          nox -rs formatting_check
       - name: If needed, commit changes
         if: failure()
         run: |
