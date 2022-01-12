@@ -2,7 +2,7 @@ import tempfile
 
 import nox
 
-src = "detector", "tests"
+src = "fd_detector", "fd_monitor_client", "fd_monitor_server"
 
 
 # from nox_poetry import session
@@ -56,3 +56,8 @@ def typing(session):
 @nox.session
 def building(session):
     pass
+
+
+@nox.session
+def building_fd_driver(session):
+    session.run("pio", "run", "-e", "uno")
