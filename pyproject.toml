@@ -9,11 +9,15 @@ readme = "README.md"
 homepage = ""
 documentation = ""
 keywords = [
-    "Fatigue Detection",
+    "EEE380", "Implementation of an IoT-based fatigue detection system",
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.7,<3.11"
+python = ">=3.8,<3.11"
+dlib = "^19.22.1"
+numpy = "^1.22.0"
+opencv-python = "^4.5.5"
+Flask = "^2.0.2"
 
 [tool.poetry.dev-dependencies]
 # Static Type Checker
