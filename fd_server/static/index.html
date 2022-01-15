@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>Nothing</title>
+        <link rel="stylesheet" type="text/css" href="/static/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+        <script>
+            function startTime() {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                document.getElementById("txt").innerHTML =
+                    h + ":" + m + ":" + s;
+                var t = setTimeout(startTime, 1000);
+            }
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                } // add zero in front of numbers < 10
+                return i;
+            }
+
+            function update_tmp() {
+                $.ajax({
+                    url: "/api/get_sensor_data",
+                    success: function (data) {
+                        document.getElementById("temp").innerHTML = data[0];
+                            // data[0] + "°C";
+                        document.getElementById("hum").innerHTML = data[1];
+                            // data[1] + "%";
+                    },
+                });
+            }
+
+            window.setInterval(function () {
+                update_tmp();
+            }, 2000);
+        </script>
+
+        <script src="/static/update.js"></script>
+    </head>
+    <body onload="startTime()">
+        <ul>
+            <li>
+                <span><i class="far fa-clock"></i>&nbsp;</span><span id="txt"></span>
+            </li>
+
+            <li>
+                <span><i class="fas fa-car"></i>&nbsp;&nbsp;</span
+                ><span id="temp">Fatigue Index</span>
+            </li>
+
+            <!-- <li>
+                <span><i class="fa fa-tint"></i>&nbsp;&nbsp;</span
+                ><span id="hum">humidity</span>
+            </li> -->
+        </ul>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    </body>
+</html>
