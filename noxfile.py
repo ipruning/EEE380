@@ -2,7 +2,7 @@ import tempfile
 
 import nox
 
-src = "fd_detector", "fd_monitor_client", "fd_monitor_server"
+src = "fd_detector", "fd_client", "fd_server"
 
 
 # from nox_poetry import session
