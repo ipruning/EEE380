@@ -32,19 +32,19 @@
 $ curl -sSL https://install.python-poetry.org | python3 -
 
 # Set environment variables
-echo 'export PATH="$HOME/.poetry/bin:$PATH"' >> ~/.zshrc
+$ echo 'export PATH="$HOME/.poetry/bin:$PATH"' >> ~/.zshrc
 
 # Install package
-poetry install
+$ poetry install
 
 # Activate the virtual environment for the current project
-poetry shell
+$ poetry shell
 
 # Generate lockfile
-poetry lock --no-update
+$ poetry lock --no-update
 
 # Run the main program
-poetry run python <files>
+$ poetry run python <files>
 ```
 
 ### 1.2 Usage of the hardware part
