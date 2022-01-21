@@ -152,14 +152,14 @@ cython_debug/
 .idea/
 
 # VS Code
-/.vscode
+.vscode/
 
 # Playground
-/playground
+playground/
 
 # PlatformIO
-.pio
+.pio/
 
 # Others
-logs
+logs/
 shape_predictor_68_face_landmarks.dat
