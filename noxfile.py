@@ -35,7 +35,7 @@ def formatting(session):
     session.run("isort", ".")
 
 
-@nox.session(python=["3.8", "3.9", "3.10", "3.11"])
+@nox.session(python=["3.8", "3.9", "3.10"])
 def testing(session):
     install_with_constraints(session, "pytest", "pytest-cov", "coverage[toml]", "loguru")
     session.run("coverage", "run", "-m", "pytest")
