@@ -41,6 +41,7 @@ nox-poetry = "^0.9.0"
 # Build
 # Other dependencies
 loguru = "^0.6.0"
+commitizen = "^2.21.2"
 
 [tool.mypy]
 ignore_missing_imports = true
@@ -67,6 +68,11 @@ extend_skip_glob=[".*", "*/site-packages/*","*/__init__.py", "*/__main__.py","*/
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1"
+tag_format = "v$version"
 
 [build-system]
 requires = ["poetry>=1.0.0"]
