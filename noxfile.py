@@ -2,7 +2,7 @@ import tempfile
 
 import nox
 
-src = "fd_detector", "fd_client", "fd_server"
+src = "fd_client", "fd_detector", "fd_driver", "fd_server"
 
 
 # from nox_poetry import session
@@ -68,3 +68,4 @@ def building(session):
 @nox.session
 def building_fd_driver(session):
     session.run("pio", "run", "-e", "uno")
+    # session.run("pio", "run", "--target", "upload")
