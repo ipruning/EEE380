@@ -4,11 +4,12 @@ from loguru import logger
 
 
 logger.add(
-    "logs/" + str(os.path.basename(__file__)) + ".log",
+    f"logs/{str(os.path.basename(__file__))}.log",
     level="DEBUG",
     format="{time:YYYY-MM-DD :mm:ss} - {level} - {file} - {line} - {message}",
     rotation="10 MB",
 )
+
 logger.info("Start Log")
 
 
