@@ -70,22 +70,24 @@ class FlaskThread(threading.Thread):
     def run(self) -> None:
         app.run(host="0.0.0.0", port=5000)
 
-    def run_debug(self) -> None:
-        app.run(host="0.0.0.0", port=5000, debug=True)
+
+class TelegramThread(threading.Thread):
+    def run() -> None:
+        u = telegram.ext.Updater(config("BOT_API_KEY"), use_context=True)
+        # j = u.job_queue
+        u.dispatcher.add_handler(CommandHandler("help", callback_help))
+        u.dispatcher.add_handler(CommandHandler("start", callback_start))
+        u.dispatcher.add_handler(CommandHandler("start_m", callback_start_m))
+        u.dispatcher.add_handler(CommandHandler("stop_m", callback_stop_m))
+        u.start_polling()
+        u.idle()
 
 
-def run_bot() -> None:
-    u = telegram.ext.Updater(config("BOT_API_KEY"), use_context=True)
-    # j = u.job_queue
-    u.dispatcher.add_handler(CommandHandler("help", callback_help))
-    u.dispatcher.add_handler(CommandHandler("start", callback_start))
-    u.dispatcher.add_handler(CommandHandler("start_m", callback_start_m))
-    u.dispatcher.add_handler(CommandHandler("stop_m", callback_stop_m))
-    u.start_polling()
-    u.idle()
+def main() -> None:
+    flask_thread = FlaskThread()
+    flask_thread.start()
+    TelegramThread.run()
 
 
 if __name__ == "__main__":
-    flask_thread = FlaskThread()
-    flask_thread.start()
-    run_bot()
+    main()
