@@ -27,7 +27,7 @@
 
             function update_tmp() {
                 $.ajax({
-                    url: "/api/get_sensor_data",
+                    url: "/api/v1/get_sensor_data",
                     success: function (data) {
                         document.getElementById("temp").innerHTML = data[0];
                             // data[0] + "°C";
