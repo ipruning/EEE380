@@ -4,10 +4,9 @@ import threading
 
 from decouple import config
 import flask
+import requests
 import telegram
 from telegram.ext import CommandHandler
-
-import requests
 
 """
 Name: fatigue_monitoring_bot
