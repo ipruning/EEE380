@@ -1,5 +1,6 @@
 import tempfile
 
+from decouple import config
 import nox
 
 src = "fd_client", "fd_detector", "fd_driver", "fd_server"
@@ -67,5 +68,7 @@ def building(session):
 
 @nox.session
 def building_fd_driver(session):
-    session.run("pio", "run", "-e", "uno")
-    # session.run("pio", "run", "--target", "upload")
+    if config("DEBUG", default=False, cast=bool):
+        session.run("pio", "run", "--target", "upload")
+    else:
+        session.run("pio", "run", "--environment", "uno")
