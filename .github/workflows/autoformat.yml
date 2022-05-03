@@ -8,11 +8,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9.9
+          python-version: 3.10.4
       - name: Set up Poetry
         uses: abatilo/actions-poetry@master
         with:
-          poetry-version: 1.1.12
+          poetry-version: 1.1.13
       - name: Setup Nox
         uses: excitedleigh/setup-nox@v2.0.0
       - name: Check
@@ -27,5 +27,5 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           nox -rs formatting
           git add .
-          git commit -m "fixup: Format Python code with Black & isort"
+          git commit -m "fixup: format python code with black & isort"
           git push
