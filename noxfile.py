@@ -2,7 +2,7 @@ import tempfile
 
 import nox
 
-src = "fd_client", "fd_detector", "fd_driver", "fd_server"
+src = "fd_detector", "fd_driver", "fd_server"
 
 
 # from nox_poetry import session
@@ -67,7 +67,7 @@ def building(session):
 
 @nox.session
 def building_fd_driver(session):
-    install_with_constraints(session, "decouple")
+    install_with_constraints(session, "python-decouple")
     from decouple import config
 
     if config("DEBUG", default=False, cast=bool):
