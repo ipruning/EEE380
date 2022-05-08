@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 
-import dlib  # 人脸识别的库dlib
-import numpy as np  # 数据处理的库numpy
+import argparse
+import datetime
+import math
+import os
+import time
+
 import cv2  # 图像处理的库OpenCv
-import wx  # 构造显示界面的GUI
-import wx.xrc
-import wx.adv
+import dlib  # 人脸识别的库dlib
+import imutils
+from imutils import face_utils
+from imutils.video import FileVideoStream, VideoStream
+import numpy as np  # 数据处理的库numpy; 数据处理的库 numpy
 
 # import the necessary packages
 from scipy.spatial import distance as dist
-from imutils.video import FileVideoStream
-from imutils.video import VideoStream
-from imutils import face_utils
-import numpy as np  # 数据处理的库 numpy
-import argparse
-import imutils
-import datetime, time
-import math
-import os
+import wx  # 构造显示界面的GUI
+import wx.adv
+import wx.xrc
 
 ###########################################################################
 ## Class Fatigue_detecting

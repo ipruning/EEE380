@@ -1,7 +1,7 @@
 import cv2
 import dlib
-import numpy as np
 from imutils import face_utils
+import numpy as np
 
 face_landmark_path = "./model/shape_predictor_68_face_landmarks.dat"
 
