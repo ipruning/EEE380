@@ -108,7 +108,7 @@ def get_head_pose(shape):  # 头部姿态估计
     pitch = math.degrees(math.asin(math.sin(pitch)))
     roll = -math.degrees(math.asin(math.sin(roll)))
     yaw = math.degrees(math.asin(math.sin(yaw)))
-    print("pitch:{}, yaw:{}, roll:{}".format(pitch, yaw, roll))
+    print(f"pitch:{pitch}, yaw:{yaw}, roll:{roll}")
 
     return reprojectdst, euler_angle  # 投影误差，欧拉角
 
@@ -120,18 +120,15 @@ def eye_aspect_ratio(eye):
     # 计算水平之间的欧几里得距离
     # 水平眼标志（X，Y）坐标
     C = dist.euclidean(eye[0], eye[3])
-    # 眼睛长宽比的计算
-    ear = (A + B) / (2.0 * C)
     # 返回眼睛的长宽比
-    return ear
+    return (A + B) / (2.0 * C)
 
 
 def mouth_aspect_ratio(mouth):  # 嘴部
     A = np.linalg.norm(mouth[2] - mouth[9])  # 51, 59
     B = np.linalg.norm(mouth[4] - mouth[7])  # 53, 57
     C = np.linalg.norm(mouth[0] - mouth[6])  # 49, 55
-    mar = (A + B) / (2.0 * C)
-    return mar
+    return (A + B) / (2.0 * C)
 
 
 # 定义常数
@@ -232,10 +229,37 @@ while True:
             COUNTER = 0
 
         # 第十四步：进行画图操作，同时使用cv2.putText将眨眼次数进行显示
-        cv2.putText(frame, "Faces: {}".format(len(rects)), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        cv2.putText(frame, "COUNTER: {}".format(COUNTER), (150, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+        cv2.putText(
+            frame,
+            f"Faces: {len(rects)}",
+            (10, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0, 0, 255),
+            2,
+        )
+
+        cv2.putText(
+            frame,
+            f"COUNTER: {COUNTER}",
+            (150, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0, 0, 255),
+            2,
+        )
+
         cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        cv2.putText(frame, "Blinks: {}".format(TOTAL), (450, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
+        cv2.putText(
+            frame,
+            f"Blinks: {TOTAL}",
+            (450, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (255, 255, 0),
+            2,
+        )
+
 
         """
             计算张嘴评分，如果小于阈值，则加1，如果连续3次都小于阈值，则表示打了一次哈欠，同一次哈欠大约在3帧
@@ -250,9 +274,27 @@ while True:
                 mTOTAL += 1
             # 重置嘴帧计数器
             mCOUNTER = 0
-        cv2.putText(frame, "COUNTER: {}".format(mCOUNTER), (150, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+        cv2.putText(
+            frame,
+            f"COUNTER: {mCOUNTER}",
+            (150, 60),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0, 0, 255),
+            2,
+        )
+
         cv2.putText(frame, "MAR: {:.2f}".format(mar), (300, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        cv2.putText(frame, "Yawning: {}".format(mTOTAL), (450, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
+        cv2.putText(
+            frame,
+            f"Yawning: {mTOTAL}",
+            (450, 60),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (255, 255, 0),
+            2,
+        )
+
         """
         瞌睡点头
         """
@@ -300,7 +342,16 @@ while True:
             (0, 0, 255),
             thickness=2,
         )  # RED
-        cv2.putText(frame, "Nod: {}".format(hTOTAL), (450, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
+        cv2.putText(
+            frame,
+            f"Nod: {hTOTAL}",
+            (450, 90),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (255, 255, 0),
+            2,
+        )
+
 
         # 第十六步：进行画图操作，68个特征点标识
         for (x, y) in shape:
