@@ -10,8 +10,8 @@ from telegram.ext import CommandHandler
 
 """
 Name: fatigue_monitoring_bot
-Description: A Telegram bot that monitors the fatigue of a user.
-About: A Telegram bot that monitors the fatigue of a user.
+Description: A Telegram bot that monitors the fatigue index of a user.
+About: A Telegram bot that monitors the fatigue index of a user.
 Botpic: 🖼 has a botpic
 """
 
@@ -36,13 +36,16 @@ def callback_alarm(context: telegram.ext.CallbackContext) -> None:
     url = "http://127.0.0.1:5000/api/v1/get_sensor_data"
     resp = requests.get(url=url)
     sensor_data = resp.json()
-    my_message = f"Fatigue Value: {str(sensor_data[0])}"
+    if sensor_data[0] < 0.27:
+        my_message = f"Warning!!!!!!! {str(sensor_data[0])}"
+    else:
+        my_message = f"Fatigue Index {str(sensor_data[0])}"
     context.bot.send_message(chat_id=context.job.context, text=my_message)
 
 
 def callback_start_m(update: telegram.Update, context: telegram.ext.CallbackContext) -> None:
     context.bot.send_message(chat_id=update.message.chat_id, text="Prepare for monitoring!")
-    context.job_queue.run_repeating(callback_alarm, 3, context=update.message.chat_id)
+    context.job_queue.run_repeating(callback_alarm, 4, context=update.message.chat_id)
 
 
 def callback_stop_m(update: telegram.Update, context: telegram.ext.CallbackContext) -> None:
@@ -55,7 +58,7 @@ app = flask.Flask(__name__)
 
 @app.route("/api/v1/get_sensor_data", methods=["GET", "POST"])
 def draw_stone():
-    fatigue_index, d_hum = round(random.uniform(0, 1), 4), round(random.uniform(0, 1), 4)
+    fatigue_index, d_hum = round(random.uniform(0.25, 0.36), 4), round(random.uniform(0, 1), 4)
     data = [fatigue_index, d_hum]
     return flask.Response(json.dumps(data), mimetype="application/json")
 
