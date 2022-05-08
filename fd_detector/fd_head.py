@@ -111,7 +111,7 @@ def main():
                 pitch = format(euler_angle[0, 0])
                 yaw = format(euler_angle[1, 0])
                 roll = format(euler_angle[2, 0])
-                print("pitch:{}, yaw:{}, roll:{}".format(pitch, yaw, roll))
+                print(f"pitch:{pitch}, yaw:{yaw}, roll:{roll}")
 
                 for (x, y) in shape:
                     cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)

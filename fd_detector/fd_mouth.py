@@ -14,16 +14,14 @@ def eye_aspect_ratio(eye):
     A = dist.euclidean(eye[1], eye[5])
     B = dist.euclidean(eye[2], eye[4])
     C = dist.euclidean(eye[0], eye[3])
-    ear = (A + B) / (2.0 * C)
-    return ear
+    return (A + B) / (2.0 * C)
 
 
 def mouth_aspect_ratio(mouth):
     A = np.linalg.norm(mouth[2] - mouth[9])  # 51, 59
     B = np.linalg.norm(mouth[4] - mouth[7])  # 53, 57
     C = np.linalg.norm(mouth[0] - mouth[6])  # 49, 55
-    mar = (A + B) / (2.0 * C)
-    return mar
+    return (A + B) / (2.0 * C)
 
 
 EYE_AR_THRESH = 0.2
@@ -91,9 +89,36 @@ while True:
                 TOTAL += 1
             COUNTER = 0
 
-        cv2.putText(frame, "Faces: {}".format(len(rects)), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        cv2.putText(frame, "Blinks: {}".format(TOTAL), (150, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        cv2.putText(frame, "COUNTER: {}".format(COUNTER), (300, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+        cv2.putText(
+            frame,
+            f"Faces: {len(rects)}",
+            (10, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0, 0, 255),
+            2,
+        )
+
+        cv2.putText(
+            frame,
+            f"Blinks: {TOTAL}",
+            (150, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0, 0, 255),
+            2,
+        )
+
+        cv2.putText(
+            frame,
+            f"COUNTER: {COUNTER}",
+            (300, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0, 0, 255),
+            2,
+        )
+
         cv2.putText(frame, "EAR: {:.2f}".format(ear), (450, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
         if mar > MAR_THRESH:
@@ -103,8 +128,26 @@ while True:
             if mCOUNTER >= MOUTH_AR_CONSEC_FRAMES:
                 mTOTAL += 1
             mCOUNTER = 0
-        cv2.putText(frame, "Yawning: {}".format(mTOTAL), (150, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        cv2.putText(frame, "mCOUNTER: {}".format(mCOUNTER), (300, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+        cv2.putText(
+            frame,
+            f"Yawning: {mTOTAL}",
+            (150, 60),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0, 0, 255),
+            2,
+        )
+
+        cv2.putText(
+            frame,
+            f"mCOUNTER: {mCOUNTER}",
+            (300, 60),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0, 0, 255),
+            2,
+        )
+
         cv2.putText(frame, "MAR: {:.2f}".format(mar), (480, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
         for (x, y) in shape:
