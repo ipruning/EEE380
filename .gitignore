@@ -151,6 +151,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
+# Custom
+
 # VS Code
 .vscode/
 
@@ -160,6 +162,17 @@ playground/
 # PlatformIO
 .pio/
 
-# Others
+# Env
+settings.ini
+
+# Logs
 logs/
+
+# Sets
 shape_predictor_68_face_landmarks.dat
+
+# Models
+model/
+
+# Debug
+result*.json
