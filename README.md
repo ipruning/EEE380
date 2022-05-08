@@ -57,6 +57,7 @@ python -m pip install --global-option='build_ext' --global-option='-I/opt/homebr
 ```
 
 ```python
+# https://github.com/Uberi/speech_recognition/pull/592/commits/467224e845e9b6ef25bef84494bd240d58429933
 # python3.10/site-packages/speech_recognition/__init__.py
 # install vosk-api
 def recognize_vosk(self, audio_data, language='en'):
