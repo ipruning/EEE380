@@ -7,7 +7,7 @@ The source code of each library should be placed in a an own separate directory
 
 For example, see a structure of the following two libraries `Foo` and `Bar`:
 
-```
+```text
 |--lib
 |  |
 |  |--Bar
@@ -31,7 +31,7 @@ For example, see a structure of the following two libraries `Foo` and `Bar`:
 
 and a contents of `src/main.c`:
 
-```
+```text
 #include <Foo.h>
 #include <Bar.h>
 
@@ -46,4 +46,5 @@ PlatformIO Library Dependency Finder will find automatically dependent
 libraries scanning project source files.
 
 More information about PlatformIO Library Dependency Finder
+
 - https://docs.platformio.org/page/librarymanager/ldf.html
